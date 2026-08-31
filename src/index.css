@@ -62,7 +62,8 @@ h3 {
   width: 42px;
   height: 42px;
   border-radius: 13px;
-  background: var(--primaria);
+  background: linear-gradient(155deg, var(--violeta), var(--violeta-escuro));
+  box-shadow: var(--sombra);
   color: white;
   display: flex;
   align-items: center;
@@ -102,7 +103,10 @@ h3 {
   padding: var(--espaco);
   background: var(--superficie);
   border: 1px solid var(--borda);
-  border-radius: 12px;
+  border-radius: var(--raio);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  box-shadow: var(--sombra);
 }
 
 .form-cadastro h2 {
@@ -141,10 +145,21 @@ h3 {
   min-height: 44px;
   padding: 10px;
   border-radius: 999px;
-  background: var(--primaria);
+  background: linear-gradient(155deg, var(--violeta), var(--violeta-escuro));
   color: white;
   font: inherit;
   font-weight: 600;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.botao-primario:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--sombra);
+}
+
+.botao-primario:focus-visible {
+  outline: 3px solid var(--violeta-suave);
+  outline-offset: 2px;
 }
 
 .filtros {
@@ -156,6 +171,9 @@ h3 {
   background: var(--superficie);
   border: 1px solid var(--borda);
   border-radius: 999px;
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  box-shadow: var(--sombra);
 }
 
 .campo-busca {
@@ -203,9 +221,21 @@ h3 {
   padding: 8px 16px;
   border: 1px solid var(--borda);
   border-radius: 999px;
-  background: var(--superficie);
+  background: rgba(255, 255, 255, 0.5);
   font: inherit;
   font-weight: 600;
+  color: var(--texto-suave);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.botao-limpar:hover {
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--texto);
+}
+
+.botao-limpar:focus-visible {
+  outline: 3px solid var(--violeta-suave);
+  outline-offset: 2px;
 }
 
 .contagem {
@@ -223,7 +253,15 @@ h3 {
   padding: var(--espaco);
   background: var(--superficie);
   border: 1px solid var(--borda);
-  border-radius: 12px;
+  border-radius: var(--raio);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  box-shadow: var(--sombra);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card-aluno:hover {
+  transform: translateY(-2px);
 }
 
 .card-topo {
@@ -245,13 +283,13 @@ h3 {
 }
 
 .selo-aprovado {
-  background: #dff3e6;
-  color: #1c7a3d;
+  background: var(--violeta-suave);
+  color: var(--violeta-escuro);
 }
 
 .selo-reprovado {
-  background: #fdeee0;
-  color: #a4530f;
+  background: var(--ambar-suave);
+  color: var(--ambar);
 }
 
 .card-dados {
@@ -287,9 +325,21 @@ h3 {
   padding: 6px 12px;
   border: 1px solid var(--borda);
   border-radius: 999px;
-  background: var(--superficie);
+  background: rgba(255, 255, 255, 0.5);
   font: inherit;
   font-size: 13px;
+  color: var(--texto-suave);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.botao-excluir:hover {
+  background: var(--ambar-suave);
+  color: var(--ambar);
+}
+
+.botao-excluir:focus-visible {
+  outline: 3px solid var(--violeta-suave);
+  outline-offset: 2px;
 }
 
 .media-bloco {
@@ -306,4 +356,17 @@ h3 {
 .media-rotulo {
   font-size: 11px;
   opacity: 0.6;
+}
+
+.campo-busca input:focus-visible,
+.campo-numero input:focus-visible,
+.campo input:focus-visible {
+  outline: 3px solid var(--violeta-suave);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
 }
