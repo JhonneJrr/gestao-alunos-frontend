@@ -44,40 +44,35 @@ function FormDisciplina({ aoCriarDisciplina }: FormDisciplinaProps) {
   }
 
   return (
-    <aside className="form-cadastro">
-      <h2>Cadastrar disciplina</h2>
-      <p>Preencha os dados para adicionar uma nova disciplina ao portal.</p>
+    <form className="form-disciplina-inline" onSubmit={aoEnviar}>
+      <div className="campo">
+        <label htmlFor="nome-disciplina">Nome da disciplina</label>
+        <input
+          id="nome-disciplina"
+          type="text"
+          placeholder="Ex.: Redes de Computadores"
+          value={nome}
+          onChange={(evento) => setNome(evento.target.value)}
+        />
+      </div>
 
-      <form onSubmit={aoEnviar}>
-        <div className="campo">
-          <label htmlFor="nome-disciplina">Nome</label>
-          <input
-            id="nome-disciplina"
-            type="text"
-            placeholder="Ex.: Redes de Computadores"
-            value={nome}
-            onChange={(evento) => setNome(evento.target.value)}
-          />
-        </div>
+      <div className="campo campo-carga">
+        <label htmlFor="carga-horaria">Carga horária</label>
+        <input
+          id="carga-horaria"
+          type="number"
+          placeholder="Ex.: 60"
+          value={cargaHoraria}
+          onChange={(evento) => setCargaHoraria(evento.target.value)}
+        />
+      </div>
 
-        <div className="campo">
-          <label htmlFor="carga-horaria">Carga horária</label>
-          <input
-            id="carga-horaria"
-            type="number"
-            placeholder="Ex.: 60"
-            value={cargaHoraria}
-            onChange={(evento) => setCargaHoraria(evento.target.value)}
-          />
-        </div>
+      <button className="botao-primario" type="submit">
+        Cadastrar
+      </button>
 
-        {mensagemErro !== "" && <p className="campo-erro">{mensagemErro}</p>}
-
-        <button className="botao-primario" type="submit">
-          Cadastrar disciplina
-        </button>
-      </form>
-    </aside>
+      {mensagemErro !== "" && <p className="campo-erro">{mensagemErro}</p>}
+    </form>
   );
 }
 

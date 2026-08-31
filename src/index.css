@@ -348,18 +348,47 @@ h3 {
   opacity: 1;
 }
 
-.tela-disciplinas-conteudo {
-  padding: 24px var(--espaco) var(--espaco);
-  display: grid;
-  grid-template-columns: 1fr 320px;
-  gap: var(--espaco);
-  align-items: start;
-}
-
 .tela-disciplinas {
+  padding: 24px var(--espaco) var(--espaco);
   display: flex;
   flex-direction: column;
   gap: var(--espaco);
+}
+
+.form-disciplina-inline {
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding: var(--espaco);
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  box-shadow: var(--sombra);
+}
+
+.form-disciplina-inline .campo {
+  margin-bottom: 0;
+  flex: 1;
+  min-width: 200px;
+}
+
+.form-disciplina-inline .campo-carga {
+  flex: 0 1 160px;
+  min-width: 120px;
+}
+
+.form-disciplina-inline .botao-primario {
+  width: auto;
+  padding: 0 28px;
+  flex-shrink: 0;
+}
+
+.form-disciplina-inline .campo-erro {
+  flex-basis: 100%;
+  margin: 0;
 }
 
 .tela-disciplinas h2 {
@@ -809,12 +838,16 @@ h3 {
 }
 
 @media (max-width: 720px) {
-  .conteudo,
-  .tela-disciplinas-conteudo {
+  .conteudo {
     grid-template-columns: 1fr;
   }
 
-  .filtros {
+  .form-disciplina-inline .botao-primario {
+    width: 100%;
+  }
+
+  .filtros,
+  .form-disciplina-inline {
     flex-direction: column;
     align-items: stretch;
     border-radius: var(--raio);
