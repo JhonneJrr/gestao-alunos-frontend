@@ -16,6 +16,9 @@ function PainelAlunos() {
 
   useEffect(() => {
     async function carregar() {
+      setCarregando(true);
+      setErro("");
+
       try {
         const dados = await listarAlunos({
           q: q === "" ? undefined : q,
