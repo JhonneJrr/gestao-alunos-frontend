@@ -2,6 +2,12 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 :root {
   --fundo: #f7f4ee;
   --superficie: rgba(255, 255, 255, 0.6);
@@ -492,7 +498,7 @@ h3 {
   align-items: center;
   gap: 8px;
   flex: 1;
-  min-width: 160px;
+  min-width: 0;
 }
 
 .campo-busca svg {
@@ -504,7 +510,8 @@ h3 {
 .campo-busca input {
   border: none;
   outline: none;
-  width: 100%;
+  flex: 1;
+  min-width: 0;
   font: inherit;
 }
 
@@ -674,6 +681,54 @@ h3 {
 .campo input:focus-visible {
   outline: 3px solid var(--violeta-suave);
   outline-offset: 2px;
+}
+
+.card-aluno,
+.card-funcao,
+.card-disciplina,
+.indicador,
+.grade-alunos,
+.grade-funcoes,
+.grade-disciplinas,
+.grade-indicadores {
+  min-width: 0;
+}
+
+@media (max-width: 720px) {
+  .conteudo {
+    grid-template-columns: 1fr;
+  }
+
+  .filtros {
+    flex-direction: column;
+    align-items: stretch;
+    border-radius: var(--raio);
+  }
+
+  .grade-funcoes,
+  .grade-alunos,
+  .grade-disciplinas,
+  .grade-indicadores {
+    grid-template-columns: 1fr;
+  }
+
+  .tela-entry .entry-logo {
+    width: 56px;
+    height: 56px;
+  }
+
+  .tela-entry .entry-logo svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .tela-entry h1 {
+    font-size: 22px;
+  }
+
+  .tela-matriculas {
+    max-width: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
