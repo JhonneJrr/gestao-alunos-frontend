@@ -313,6 +313,25 @@ h3 {
   list-style: none;
 }
 
+.form-matricula {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--espaco);
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  box-shadow: var(--sombra);
+}
+
+.mensagem-sucesso {
+  color: var(--violeta-escuro);
+  font-size: 13px;
+  margin: -6px 0 14px;
+}
+
 .painel {
   display: flex;
   flex-direction: column;
