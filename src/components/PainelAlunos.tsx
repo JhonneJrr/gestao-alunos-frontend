@@ -1,11 +1,16 @@
 import { useEffect, useState } from "react";
 import type { Aluno } from "../types";
 import { excluirAluno, listarAlunos } from "../api";
+import BotaoVoltar from "./BotaoVoltar";
 import Filtros from "./Filtros";
 import FormAluno from "./FormAluno";
 import ListaAlunos from "./ListaAlunos";
 
-function PainelAlunos() {
+interface PainelAlunosProps {
+  aoVoltar: () => void;
+}
+
+function PainelAlunos({ aoVoltar }: PainelAlunosProps) {
   const [alunos, setAlunos] = useState<Aluno[]>([]);
   const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState("");
@@ -68,6 +73,7 @@ function PainelAlunos() {
   return (
     <main className="conteudo">
       <section className="painel">
+        <BotaoVoltar aoVoltar={aoVoltar} />
         <Filtros
           q={q}
           idadeMinima={idadeMinima}

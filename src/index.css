@@ -120,8 +120,13 @@ h3 {
 
 .cabecalho h1 {
   margin: 0;
+}
+
+.cabecalho h1 button {
   width: 42px;
   height: 42px;
+  border: none;
+  padding: 0;
   border-radius: 13px;
   background: linear-gradient(155deg, var(--violeta), var(--violeta-escuro));
   box-shadow: var(--sombra);
@@ -129,6 +134,12 @@ h3 {
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+}
+
+.cabecalho h1 button:focus-visible {
+  outline: 3px solid var(--violeta-suave);
+  outline-offset: 2px;
 }
 
 .cabecalho svg {
@@ -152,6 +163,106 @@ h3 {
   grid-template-columns: 1fr 320px;
   gap: var(--espaco);
   align-items: start;
+}
+
+.botao-voltar {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 8px 16px;
+  border: 1px solid var(--borda);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.5);
+  color: var(--texto-suave);
+  font: inherit;
+  font-weight: 600;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.botao-voltar svg {
+  width: 16px;
+  height: 16px;
+}
+
+.botao-voltar:hover {
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--texto);
+}
+
+.botao-voltar:focus-visible {
+  outline: 3px solid var(--violeta-suave);
+  outline-offset: 2px;
+}
+
+.tela-home {
+  padding: 24px var(--espaco) var(--espaco);
+}
+
+.tela-home h2 {
+  margin: 0 0 var(--espaco);
+}
+
+.grade-funcoes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--espaco);
+}
+
+.card-funcao {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  text-align: left;
+  padding: var(--espaco);
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  box-shadow: var(--sombra);
+  font: inherit;
+  color: var(--texto);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.card-funcao:hover {
+  transform: translateY(-2px);
+}
+
+.card-funcao:focus-visible {
+  outline: 3px solid var(--violeta-suave);
+  outline-offset: 2px;
+}
+
+.card-funcao-icone {
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  background: var(--violeta-suave);
+  color: var(--violeta-escuro);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-funcao-icone svg {
+  width: 22px;
+  height: 22px;
+}
+
+.card-funcao h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.card-funcao p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--texto-suave);
 }
 
 .painel {

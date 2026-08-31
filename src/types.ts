@@ -25,4 +25,4 @@ export interface FiltrosAluno {
   media_minima?: number;
 }
 
-export type Tela = "entry" | "alunos";
+export type Tela = "entry" | "home" | "alunos";

@@ -3,6 +3,7 @@ import type { Tela } from "./types";
 import Cabecalho from "./components/Cabecalho";
 import PainelAlunos from "./components/PainelAlunos";
 import TelaEntry from "./components/TelaEntry";
+import TelaHome from "./components/TelaHome";
 
 function App() {
   const [tela, setTela] = useState<Tela>("entry");
@@ -14,13 +15,14 @@ function App() {
   }, [tela]);
 
   if (tela === "entry") {
-    return <TelaEntry aoEntrar={() => setTela("alunos")} />;
+    return <TelaEntry aoEntrar={() => setTela("home")} />;
   }
 
   return (
     <div className="pagina">
-      <Cabecalho />
-      <PainelAlunos />
+      <Cabecalho aoIrParaHome={() => setTela("home")} />
+      {tela === "home" && <TelaHome aoAbrirTela={setTela} />}
+      {tela === "alunos" && <PainelAlunos aoVoltar={() => setTela("home")} />}
     </div>
   );
 }
