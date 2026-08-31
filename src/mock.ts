@@ -1,4 +1,4 @@
-import type { Aluno, Disciplina } from "./types";
+import type { Aluno, Disciplina, Matricula } from "./types";
 
 export const alunosIniciais: Aluno[] = [
   { id: 1, nome: "Ana Beatriz Souza", idade: 19, matricula: "2026001", media: 8.5 },
@@ -16,4 +16,13 @@ export const disciplinasIniciais: Disciplina[] = [
   { id: 2, nome: "Banco de Dados", carga_horaria: 60 },
   { id: 3, nome: "Estrutura de Dados", carga_horaria: 80 },
   { id: 4, nome: "Desenvolvimento Web", carga_horaria: 50 },
+];
+
+export const matriculasIniciais: Matricula[] = [
+  { aluno_id: 1, disciplina_id: 1 },
+  { aluno_id: 1, disciplina_id: 2 },
+  { aluno_id: 2, disciplina_id: 1 },
+  { aluno_id: 3, disciplina_id: 3 },
+  { aluno_id: 4, disciplina_id: 4 },
+  { aluno_id: 6, disciplina_id: 2 },
 ];

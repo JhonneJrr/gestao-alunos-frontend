@@ -1,5 +1,5 @@
-import type { Aluno, AlunoEntrada, Disciplina, FiltrosAluno } from "./types";
-import { alunosIniciais, disciplinasIniciais } from "./mock";
+import type { Aluno, AlunoEntrada, Disciplina, FiltrosAluno, Matricula } from "./types";
+import { alunosIniciais, disciplinasIniciais, matriculasIniciais } from "./mock";
 
 export function esperar(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -7,6 +7,7 @@ export function esperar(ms: number): Promise<void> {
 
 let bancoAlunos: Aluno[] = [...alunosIniciais];
 let bancoDisciplinas: Disciplina[] = [...disciplinasIniciais];
+let bancoMatriculas: Matricula[] = [...matriculasIniciais];
 
 export async function listarAlunos(filtros?: FiltrosAluno): Promise<Aluno[]> {
   await esperar(500);
@@ -55,9 +56,48 @@ export async function excluirAluno(id: number): Promise<void> {
   }
 
   bancoAlunos = bancoAlunos.filter((aluno) => aluno.id !== id);
+  bancoMatriculas = bancoMatriculas.filter((matricula) => matricula.aluno_id !== id);
 }
 
 export async function listarDisciplinas(): Promise<Disciplina[]> {
   await esperar(400);
   return [...bancoDisciplinas];
+}
+
+export async function disciplinasDoAluno(alunoId: number): Promise<Disciplina[]> {
+  await esperar(300);
+
+  const alunoExiste = bancoAlunos.some((aluno) => aluno.id === alunoId);
+  if (!alunoExiste) {
+    throw new Error("Aluno não encontrado");
+  }
+
+  const idsDisciplinas = bancoMatriculas
+    .filter((matricula) => matricula.aluno_id === alunoId)
+    .map((matricula) => matricula.disciplina_id);
+
+  return bancoDisciplinas.filter((disciplina) => idsDisciplinas.includes(disciplina.id));
+}
+
+export async function matricular(alunoId: number, disciplinaId: number): Promise<void> {
+  await esperar(300);
+
+  const alunoExiste = bancoAlunos.some((aluno) => aluno.id === alunoId);
+  if (!alunoExiste) {
+    throw new Error("Aluno não encontrado");
+  }
+
+  const disciplinaExiste = bancoDisciplinas.some((disciplina) => disciplina.id === disciplinaId);
+  if (!disciplinaExiste) {
+    throw new Error("Disciplina não encontrada");
+  }
+
+  const jaMatriculado = bancoMatriculas.some(
+    (matricula) => matricula.aluno_id === alunoId && matricula.disciplina_id === disciplinaId
+  );
+  if (jaMatriculado) {
+    throw new Error("Este aluno já está matriculado nessa disciplina");
+  }
+
+  bancoMatriculas = [...bancoMatriculas, { aluno_id: alunoId, disciplina_id: disciplinaId }];
 }

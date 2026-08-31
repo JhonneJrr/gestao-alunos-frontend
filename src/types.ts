@@ -25,4 +25,9 @@ export interface FiltrosAluno {
   media_minima?: number;
 }
 
+export interface Matricula {
+  aluno_id: number;
+  disciplina_id: number;
+}
+
 export type Tela = "entry" | "home" | "alunos" | "disciplinas";
