@@ -218,19 +218,19 @@ h3 {
 
 .grade-funcoes {
   display: grid;
-  grid-template-columns: repeat(2, minmax(200px, 260px));
-  gap: var(--espaco);
+  grid-template-columns: repeat(2, minmax(260px, 340px));
+  gap: 24px;
   width: 100%;
-  max-width: 560px;
+  max-width: 720px;
 }
 
 .card-funcao {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 8px;
+  gap: 14px;
   text-align: left;
-  padding: var(--espaco);
+  padding: 28px;
   background: var(--superficie);
   border: 1px solid var(--borda);
   border-radius: var(--raio);
@@ -253,9 +253,9 @@ h3 {
 }
 
 .card-funcao-icone {
-  width: 44px;
-  height: 44px;
-  border-radius: 13px;
+  width: 60px;
+  height: 60px;
+  border-radius: 17px;
   background: var(--violeta-suave);
   color: var(--violeta-escuro);
   display: flex;
@@ -264,18 +264,18 @@ h3 {
 }
 
 .card-funcao-icone svg {
-  width: 22px;
-  height: 22px;
+  width: 30px;
+  height: 30px;
 }
 
 .card-funcao h3 {
   margin: 0;
-  font-size: 16px;
+  font-size: 19px;
 }
 
 .card-funcao p {
   margin: 0;
-  font-size: 13px;
+  font-size: 14px;
   color: var(--texto-suave);
 }
 
