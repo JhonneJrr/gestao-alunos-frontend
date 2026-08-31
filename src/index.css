@@ -47,3 +47,80 @@ body {
   width: 22px;
   height: 22px;
 }
+
+.card-aluno {
+  max-width: 280px;
+  margin: var(--espaco);
+  padding: var(--espaco);
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: 12px;
+}
+
+.card-topo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card-topo h3 {
+  margin: 0;
+}
+
+.selo {
+  align-self: flex-start;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.selo-aprovado {
+  background: #dff3e6;
+  color: #1c7a3d;
+}
+
+.selo-reprovado {
+  background: #fdeee0;
+  color: #a4530f;
+}
+
+.card-dados {
+  margin: 12px 0 0;
+  display: flex;
+  gap: 18px;
+}
+
+.card-dados dt {
+  font-size: 11px;
+  color: var(--texto);
+  opacity: 0.6;
+  margin: 0 0 2px;
+}
+
+.card-dados dd {
+  margin: 0;
+  font-weight: 500;
+}
+
+.card-rodape {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--borda);
+}
+
+.media-bloco {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+}
+
+.media-valor {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.media-rotulo {
+  font-size: 11px;
+  opacity: 0.6;
+}
