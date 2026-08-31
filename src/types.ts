@@ -18,3 +18,9 @@ export interface Disciplina {
   nome: string;
   carga_horaria: number;
 }
+
+export interface FiltrosAluno {
+  q?: string;
+  idade_minima?: number;
+  media_minima?: number;
+}
