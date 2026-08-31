@@ -2,9 +2,10 @@ import type { Aluno } from "../types";
 
 interface AlunoCardProps {
   aluno: Aluno;
+  aoExcluir: (id: number) => void;
 }
 
-function AlunoCard({ aluno }: AlunoCardProps) {
+function AlunoCard({ aluno, aoExcluir }: AlunoCardProps) {
   const aprovado = aluno.media >= 6;
   const classeSelo = aprovado ? "selo selo-aprovado" : "selo selo-reprovado";
   const textoSelo = aprovado ? "Aprovado" : "Reprovado";
@@ -30,6 +31,14 @@ function AlunoCard({ aluno }: AlunoCardProps) {
           <span className="media-valor">{aluno.media}</span>
           <span className="media-rotulo">média</span>
         </div>
+        <button
+          className="botao-excluir"
+          type="button"
+          aria-label={`Excluir ${aluno.nome}`}
+          onClick={() => aoExcluir(aluno.id)}
+        >
+          Excluir
+        </button>
       </div>
     </article>
   );

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import type { Aluno } from "../types";
-import { listarAlunos } from "../api";
+import { excluirAluno, listarAlunos } from "../api";
 import Filtros from "./Filtros";
 import FormAluno from "./FormAluno";
 import ListaAlunos from "./ListaAlunos";
@@ -44,6 +44,19 @@ function PainelAlunos() {
     limparFiltros();
   }
 
+  async function aoExcluir(id: number) {
+    try {
+      await excluirAluno(id);
+      setAlunos(alunos.filter((aluno) => aluno.id !== id));
+    } catch (erro) {
+      setErro((erro as Error).message);
+    }
+  }
+
+  useEffect(() => {
+    document.title = `Portal — ${alunos.length} alunos`;
+  }, [alunos]);
+
   const temFiltroAtivo = q !== "" || idadeMinima !== "" || mediaMinima !== "";
   const mensagemVazia = temFiltroAtivo
     ? "Nenhum aluno encontrado com esses filtros."
@@ -68,7 +81,7 @@ function PainelAlunos() {
             <p className="contagem">
               <strong>{alunos.length}</strong> aluno(s) encontrado(s)
             </p>
-            <ListaAlunos alunos={alunos} mensagemVazia={mensagemVazia} />
+            <ListaAlunos alunos={alunos} mensagemVazia={mensagemVazia} aoExcluir={aoExcluir} />
           </>
         )}
       </section>

@@ -4,9 +4,10 @@ import AlunoCard from "./AlunoCard";
 interface ListaAlunosProps {
   alunos: Aluno[];
   mensagemVazia: string;
+  aoExcluir: (id: number) => void;
 }
 
-function ListaAlunos({ alunos, mensagemVazia }: ListaAlunosProps) {
+function ListaAlunos({ alunos, mensagemVazia, aoExcluir }: ListaAlunosProps) {
   if (alunos.length === 0) {
     return <p className="mensagem-vazia">{mensagemVazia}</p>;
   }
@@ -14,7 +15,7 @@ function ListaAlunos({ alunos, mensagemVazia }: ListaAlunosProps) {
   return (
     <div className="grade-alunos">
       {alunos.map((aluno) => (
-        <AlunoCard key={aluno.id} aluno={aluno} />
+        <AlunoCard key={aluno.id} aluno={aluno} aoExcluir={aoExcluir} />
       ))}
     </div>
   );

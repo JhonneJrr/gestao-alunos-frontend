@@ -250,6 +250,20 @@ body {
   margin-top: 12px;
   padding-top: 12px;
   border-top: 1px solid var(--borda);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.botao-excluir {
+  min-height: 44px;
+  min-width: 44px;
+  padding: 6px 12px;
+  border: 1px solid var(--borda);
+  border-radius: 999px;
+  background: var(--superficie);
+  font: inherit;
+  font-size: 13px;
 }
 
 .media-bloco {
