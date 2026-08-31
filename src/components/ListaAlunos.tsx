@@ -3,11 +3,12 @@ import AlunoCard from "./AlunoCard";
 
 interface ListaAlunosProps {
   alunos: Aluno[];
+  mensagemVazia: string;
 }
 
-function ListaAlunos({ alunos }: ListaAlunosProps) {
+function ListaAlunos({ alunos, mensagemVazia }: ListaAlunosProps) {
   if (alunos.length === 0) {
-    return <p className="mensagem-vazia">Nenhum aluno cadastrado ainda.</p>;
+    return <p className="mensagem-vazia">{mensagemVazia}</p>;
   }
 
   return (

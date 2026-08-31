@@ -60,6 +60,75 @@ body {
 
 .painel {
   padding: 0 var(--espaco);
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco);
+}
+
+.filtros {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding: 10px 14px;
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: 999px;
+}
+
+.campo-busca {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 160px;
+}
+
+.campo-busca svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.campo-busca input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font: inherit;
+}
+
+.campo-numero {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.campo-numero label {
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.campo-numero input {
+  width: 56px;
+  border: 1px solid var(--borda);
+  border-radius: 999px;
+  padding: 6px 10px;
+  font: inherit;
+}
+
+.botao-limpar {
+  min-height: 44px;
+  padding: 8px 16px;
+  border: 1px solid var(--borda);
+  border-radius: 999px;
+  background: var(--superficie);
+  font: inherit;
+  font-weight: 600;
+}
+
+.contagem {
+  margin: 0;
+  font-size: 14px;
 }
 
 .grade-alunos {
