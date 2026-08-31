@@ -332,6 +332,43 @@ h3 {
   margin: -6px 0 14px;
 }
 
+.tela-dashboard {
+  padding: 24px var(--espaco) var(--espaco);
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco);
+}
+
+.grade-indicadores {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: var(--espaco);
+}
+
+.indicador {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--espaco);
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  box-shadow: var(--sombra);
+}
+
+.indicador-valor {
+  font-family: "Outfit", sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.indicador-rotulo {
+  font-size: 12px;
+  color: var(--texto-suave);
+}
+
 .painel {
   display: flex;
   flex-direction: column;
