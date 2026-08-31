@@ -1,4 +1,4 @@
-import type { Aluno, AlunoEntrada, Disciplina, FiltrosAluno, Matricula } from "./types";
+import type { Aluno, AlunoEntrada, Disciplina, DisciplinaEntrada, FiltrosAluno, Matricula } from "./types";
 import { alunosIniciais, disciplinasIniciais, matriculasIniciais } from "./mock";
 
 export function esperar(ms: number): Promise<void> {
@@ -75,6 +75,35 @@ export async function listarDisciplinas(): Promise<Disciplina[]> {
     await esperar(400);
   }
   return [...bancoDisciplinas];
+}
+
+export async function criarDisciplina(dados: DisciplinaEntrada): Promise<Disciplina> {
+  await esperar(300);
+
+  const jaExiste = bancoDisciplinas.some(
+    (disciplina) => disciplina.nome.toLowerCase() === dados.nome.toLowerCase()
+  );
+  if (jaExiste) {
+    throw new Error("Já existe uma disciplina com esse nome");
+  }
+
+  const novoId = Math.max(0, ...bancoDisciplinas.map((disciplina) => disciplina.id)) + 1;
+  const novaDisciplina: Disciplina = { id: novoId, ...dados };
+  bancoDisciplinas = [...bancoDisciplinas, novaDisciplina];
+
+  return novaDisciplina;
+}
+
+export async function excluirDisciplina(id: number): Promise<void> {
+  await esperar(300);
+
+  const existe = bancoDisciplinas.some((disciplina) => disciplina.id === id);
+  if (!existe) {
+    throw new Error("Disciplina não encontrada");
+  }
+
+  bancoDisciplinas = bancoDisciplinas.filter((disciplina) => disciplina.id !== id);
+  bancoMatriculas = bancoMatriculas.filter((matricula) => matricula.disciplina_id !== id);
 }
 
 export async function disciplinasDoAluno(alunoId: number): Promise<Disciplina[]> {

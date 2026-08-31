@@ -348,8 +348,15 @@ h3 {
   opacity: 1;
 }
 
-.tela-disciplinas {
+.tela-disciplinas-conteudo {
   padding: 24px var(--espaco) var(--espaco);
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: var(--espaco);
+  align-items: start;
+}
+
+.tela-disciplinas {
   display: flex;
   flex-direction: column;
   gap: var(--espaco);
@@ -398,6 +405,11 @@ h3 {
 .card-disciplina-icone svg {
   width: 24px;
   height: 24px;
+}
+
+.card-disciplina-info {
+  flex: 1;
+  min-width: 0;
 }
 
 .card-disciplina-info h3 {
@@ -795,7 +807,8 @@ h3 {
 }
 
 @media (max-width: 720px) {
-  .conteudo {
+  .conteudo,
+  .tela-disciplinas-conteudo {
     grid-template-columns: 1fr;
   }
 

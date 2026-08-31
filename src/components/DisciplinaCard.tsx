@@ -2,9 +2,10 @@ import type { Disciplina } from "../types";
 
 interface DisciplinaCardProps {
   disciplina: Disciplina;
+  aoExcluir: (id: number) => void;
 }
 
-function DisciplinaCard({ disciplina }: DisciplinaCardProps) {
+function DisciplinaCard({ disciplina, aoExcluir }: DisciplinaCardProps) {
   return (
     <article className="card-disciplina">
       <div className="card-disciplina-icone">
@@ -20,6 +21,20 @@ function DisciplinaCard({ disciplina }: DisciplinaCardProps) {
           <span className="media-rotulo">horas</span>
         </div>
       </div>
+      <button
+        className="botao-excluir"
+        type="button"
+        aria-label={`Excluir ${disciplina.nome}`}
+        onClick={() => aoExcluir(disciplina.id)}
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M10 11v6"></path>
+          <path d="M14 11v6"></path>
+          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path>
+          <path d="M3 6h18"></path>
+          <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+        </svg>
+      </button>
     </article>
   );
 }
