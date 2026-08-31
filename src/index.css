@@ -2,20 +2,46 @@
   box-sizing: border-box;
 }
 
-body {
-  margin: 0;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  background: var(--fundo);
-  color: var(--texto);
+:root {
+  --fundo: #f7f4ee;
+  --superficie: rgba(255, 255, 255, 0.6);
+  --borda: rgba(40, 30, 20, 0.12);
+  --texto: #2a2419;
+  --texto-suave: rgba(42, 36, 25, 0.65);
+  --violeta: #7c4dff;
+  --violeta-escuro: #5b32d6;
+  --violeta-suave: rgba(124, 77, 255, 0.16);
+  --ambar: #c7791f;
+  --ambar-suave: rgba(199, 121, 31, 0.16);
+  --primaria: var(--violeta);
+  --sombra: 0 16px 38px -18px rgba(40, 30, 20, 0.35);
+  --raio: 22px;
+  --espaco: 16px;
 }
 
-:root {
-  --fundo: #f6f7f9;
-  --superficie: #ffffff;
-  --texto: #1c2230;
-  --primaria: #2b5cd9;
-  --borda: #dde1e8;
-  --espaco: 16px;
+body {
+  margin: 0;
+  font-family: "Karla", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--fundo);
+  color: var(--texto);
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(480px circle at 15% 10%, rgba(124, 77, 255, 0.22), transparent 60%),
+    radial-gradient(420px circle at 90% 20%, rgba(199, 121, 31, 0.18), transparent 60%),
+    radial-gradient(520px circle at 60% 90%, rgba(124, 77, 255, 0.14), transparent 60%);
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Outfit", "Karla", sans-serif;
 }
 
 .somente-leitura {
