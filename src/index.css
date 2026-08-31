@@ -70,7 +70,11 @@ h3 {
 .transicao-card {
   position: fixed;
   z-index: 50;
-  background: linear-gradient(155deg, var(--violeta), var(--violeta-escuro));
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  box-shadow: var(--sombra);
   pointer-events: none;
   animation: expandir-card 0.8s ease forwards;
 }
