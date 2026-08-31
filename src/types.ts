@@ -24,3 +24,5 @@ export interface FiltrosAluno {
   idade_minima?: number;
   media_minima?: number;
 }
+
+export type Tela = "entry" | "alunos";

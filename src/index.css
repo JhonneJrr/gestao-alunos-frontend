@@ -44,6 +44,67 @@ h3 {
   font-family: "Outfit", "Karla", sans-serif;
 }
 
+.tela-entry {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 14px;
+  padding: var(--espaco);
+}
+
+.entry-logo {
+  width: 72px;
+  height: 72px;
+  border-radius: 22px;
+  background: linear-gradient(155deg, var(--violeta), var(--violeta-escuro));
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--sombra);
+  margin-bottom: 8px;
+}
+
+.entry-logo svg {
+  width: 36px;
+  height: 36px;
+}
+
+.tela-entry h1 {
+  margin: 0;
+  font-size: 28px;
+}
+
+.tela-entry p {
+  margin: 0 0 8px;
+  color: var(--texto-suave);
+  max-width: 420px;
+}
+
+.botao-entrar {
+  min-height: 44px;
+  padding: 12px 28px;
+  border-radius: 999px;
+  background: linear-gradient(155deg, var(--violeta), var(--violeta-escuro));
+  color: white;
+  font: inherit;
+  font-weight: 600;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.botao-entrar:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--sombra);
+}
+
+.botao-entrar:focus-visible {
+  outline: 3px solid var(--violeta-suave);
+  outline-offset: 2px;
+}
+
 .somente-leitura {
   position: absolute;
   width: 1px;
