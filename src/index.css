@@ -33,17 +33,6 @@ body {
   position: relative;
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  background:
-    radial-gradient(480px circle at 15% 10%, rgba(124, 77, 255, 0.22), transparent 60%),
-    radial-gradient(420px circle at 90% 20%, rgba(199, 121, 31, 0.18), transparent 60%),
-    radial-gradient(520px circle at 60% 90%, rgba(124, 77, 255, 0.14), transparent 60%);
-}
-
 h1,
 h2,
 h3 {
@@ -240,11 +229,15 @@ h3 {
   font: inherit;
   color: var(--texto);
   cursor: pointer;
-  transition: transform 0.15s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.card-funcao:hover {
-  transform: translateY(-2px);
+.card-funcao:hover,
+.card-funcao:focus-visible {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 24px 48px -18px rgba(40, 30, 20, 0.4);
+  z-index: 1;
+  position: relative;
 }
 
 .card-funcao:focus-visible {
@@ -277,6 +270,16 @@ h3 {
   margin: 0;
   font-size: 15px;
   color: var(--texto-suave);
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.25s ease, opacity 0.2s ease;
+}
+
+.card-funcao:hover p,
+.card-funcao:focus-visible p {
+  max-height: 80px;
+  opacity: 1;
 }
 
 .tela-disciplinas {
