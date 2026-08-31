@@ -1,16 +1,17 @@
-import type { Aluno, AlunoEntrada, FiltrosAluno } from "./types";
-import { alunosIniciais } from "./mock";
+import type { Aluno, AlunoEntrada, Disciplina, FiltrosAluno } from "./types";
+import { alunosIniciais, disciplinasIniciais } from "./mock";
 
 export function esperar(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-let banco: Aluno[] = [...alunosIniciais];
+let bancoAlunos: Aluno[] = [...alunosIniciais];
+let bancoDisciplinas: Disciplina[] = [...disciplinasIniciais];
 
 export async function listarAlunos(filtros?: FiltrosAluno): Promise<Aluno[]> {
   await esperar(500);
 
-  let resultado = [...banco];
+  let resultado = [...bancoAlunos];
 
   if (filtros?.q !== undefined && filtros.q !== "") {
     const busca = filtros.q.toLowerCase();
@@ -33,14 +34,14 @@ export async function listarAlunos(filtros?: FiltrosAluno): Promise<Aluno[]> {
 export async function criarAluno(dados: AlunoEntrada): Promise<Aluno> {
   await esperar(300);
 
-  const jaExiste = banco.some((aluno) => aluno.matricula === dados.matricula);
+  const jaExiste = bancoAlunos.some((aluno) => aluno.matricula === dados.matricula);
   if (jaExiste) {
     throw new Error("Já existe um aluno com essa matrícula");
   }
 
-  const novoId = Math.max(0, ...banco.map((aluno) => aluno.id)) + 1;
+  const novoId = Math.max(0, ...bancoAlunos.map((aluno) => aluno.id)) + 1;
   const novoAluno: Aluno = { id: novoId, ...dados };
-  banco = [...banco, novoAluno];
+  bancoAlunos = [...bancoAlunos, novoAluno];
 
   return novoAluno;
 }
@@ -48,10 +49,15 @@ export async function criarAluno(dados: AlunoEntrada): Promise<Aluno> {
 export async function excluirAluno(id: number): Promise<void> {
   await esperar(300);
 
-  const existe = banco.some((aluno) => aluno.id === id);
+  const existe = bancoAlunos.some((aluno) => aluno.id === id);
   if (!existe) {
     throw new Error("Aluno não encontrado");
   }
 
-  banco = banco.filter((aluno) => aluno.id !== id);
+  bancoAlunos = bancoAlunos.filter((aluno) => aluno.id !== id);
+}
+
+export async function listarDisciplinas(): Promise<Disciplina[]> {
+  await esperar(400);
+  return [...bancoDisciplinas];
 }
