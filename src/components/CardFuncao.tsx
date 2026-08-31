@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 interface CardFuncaoProps {
   titulo: string;
   descricao: string;
-  aoAbrir: () => void;
+  aoAbrir: (evento: React.MouseEvent<HTMLButtonElement>) => void;
   children: ReactNode;
 }
 

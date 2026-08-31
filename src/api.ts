@@ -8,9 +8,20 @@ export function esperar(ms: number): Promise<void> {
 let bancoAlunos: Aluno[] = [...alunosIniciais];
 let bancoDisciplinas: Disciplina[] = [...disciplinasIniciais];
 let bancoMatriculas: Matricula[] = [...matriculasIniciais];
+let precarregado = false;
+
+export async function precarregar(): Promise<void> {
+  await esperar(600);
+  precarregado = true;
+}
 
 export async function listarAlunos(filtros?: FiltrosAluno): Promise<Aluno[]> {
-  await esperar(500);
+  const temFiltro =
+    filtros?.q !== undefined || filtros?.idade_minima !== undefined || filtros?.media_minima !== undefined;
+
+  if (!precarregado || temFiltro) {
+    await esperar(500);
+  }
 
   let resultado = [...bancoAlunos];
 
@@ -60,7 +71,9 @@ export async function excluirAluno(id: number): Promise<void> {
 }
 
 export async function listarDisciplinas(): Promise<Disciplina[]> {
-  await esperar(400);
+  if (!precarregado) {
+    await esperar(400);
+  }
   return [...bancoDisciplinas];
 }
 

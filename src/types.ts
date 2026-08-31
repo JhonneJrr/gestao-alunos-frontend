@@ -30,4 +30,4 @@ export interface Matricula {
   disciplina_id: number;
 }
 
-export type Tela = "entry" | "home" | "alunos" | "disciplinas" | "matriculas" | "dashboard";
+export type Tela = "entry" | "carregando" | "home" | "alunos" | "disciplinas" | "matriculas" | "dashboard";

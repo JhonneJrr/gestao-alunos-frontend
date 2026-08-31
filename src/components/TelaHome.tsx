@@ -2,7 +2,7 @@ import type { Tela } from "../types";
 import CardFuncao from "./CardFuncao";
 
 interface TelaHomeProps {
-  aoAbrirTela: (tela: Tela) => void;
+  aoAbrirTela: (tela: Tela, evento: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 function TelaHome({ aoAbrirTela }: TelaHomeProps) {
@@ -13,7 +13,7 @@ function TelaHome({ aoAbrirTela }: TelaHomeProps) {
         <CardFuncao
           titulo="Gestão de Alunos"
           descricao="Listar, filtrar, cadastrar e excluir alunos."
-          aoAbrir={() => aoAbrirTela("alunos")}
+          aoAbrir={(evento) => aoAbrirTela("alunos", evento)}
         >
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
@@ -26,7 +26,7 @@ function TelaHome({ aoAbrirTela }: TelaHomeProps) {
         <CardFuncao
           titulo="Disciplinas"
           descricao="Ver as disciplinas oferecidas pelo portal."
-          aoAbrir={() => aoAbrirTela("disciplinas")}
+          aoAbrir={(evento) => aoAbrirTela("disciplinas", evento)}
         >
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M12 5v16"></path>
@@ -37,7 +37,7 @@ function TelaHome({ aoAbrirTela }: TelaHomeProps) {
         <CardFuncao
           titulo="Matrículas"
           descricao="Ver e vincular alunos às disciplinas."
-          aoAbrir={() => aoAbrirTela("matriculas")}
+          aoAbrir={(evento) => aoAbrirTela("matriculas", evento)}
         >
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M9 17H7A5 5 0 0 1 7 7h2"></path>
@@ -49,7 +49,7 @@ function TelaHome({ aoAbrirTela }: TelaHomeProps) {
         <CardFuncao
           titulo="Painel"
           descricao="Estatísticas da turma: médias, aprovação e carga horária."
-          aoAbrir={() => aoAbrirTela("dashboard")}
+          aoAbrir={(evento) => aoAbrirTela("dashboard", evento)}
         >
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <rect width="7" height="9" x="3" y="3" rx="1"></rect>

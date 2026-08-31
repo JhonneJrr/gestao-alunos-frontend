@@ -39,6 +39,68 @@ h3 {
   font-family: "Outfit", "Karla", sans-serif;
 }
 
+@keyframes expandir-card {
+  0% {
+    top: var(--origem-y);
+    left: var(--origem-x);
+    width: var(--origem-w);
+    height: var(--origem-h);
+    border-radius: var(--raio);
+    opacity: 1;
+  }
+  45%,
+  65% {
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+    opacity: 1;
+  }
+  100% {
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+    opacity: 0;
+  }
+}
+
+.transicao-card {
+  position: fixed;
+  z-index: 50;
+  background: linear-gradient(155deg, var(--violeta), var(--violeta-escuro));
+  pointer-events: none;
+  animation: expandir-card 0.8s ease forwards;
+}
+
+.tela-carregando {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  text-align: center;
+  color: var(--texto-suave);
+}
+
+.spinner {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 4px solid var(--violeta-suave);
+  border-top-color: var(--violeta);
+  animation: girar 0.8s linear infinite;
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .tela-entry {
   min-height: 100vh;
   display: flex;
@@ -289,13 +351,20 @@ h3 {
   gap: var(--espaco);
 }
 
+.tela-disciplinas h2 {
+  margin: 0;
+}
+
 .grade-disciplinas {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: var(--espaco);
 }
 
 .card-disciplina {
+  display: flex;
+  align-items: center;
+  gap: 14px;
   padding: var(--espaco);
   background: var(--superficie);
   border: 1px solid var(--borda);
@@ -303,17 +372,33 @@ h3 {
   backdrop-filter: blur(16px) saturate(1.4);
   -webkit-backdrop-filter: blur(16px) saturate(1.4);
   box-shadow: var(--sombra);
+  transition: transform 0.15s ease;
 }
 
-.card-disciplina h3 {
+.card-disciplina:hover {
+  transform: translateY(-2px);
+}
+
+.card-disciplina-icone {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: 14px;
+  background: var(--violeta-suave);
+  color: var(--violeta-escuro);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-disciplina-icone svg {
+  width: 24px;
+  height: 24px;
+}
+
+.card-disciplina-info h3 {
   margin: 0 0 4px;
   font-size: 15px;
-}
-
-.card-disciplina p {
-  margin: 0;
-  color: var(--texto-suave);
-  font-size: 13px;
 }
 
 .tela-matriculas {
@@ -745,5 +830,13 @@ h3 {
 @media (prefers-reduced-motion: reduce) {
   * {
     transition: none !important;
+  }
+
+  .transicao-card {
+    display: none;
+  }
+
+  .spinner {
+    animation: none;
   }
 }

@@ -32,17 +32,24 @@ function TelaDisciplinas({ aoVoltar }: TelaDisciplinasProps) {
     <div className="tela-disciplinas">
       <BotaoVoltar aoVoltar={aoVoltar} />
 
+      <h2>Disciplinas</h2>
+
       {carregando && <p className="mensagem-status">Carregando...</p>}
       {!carregando && erro !== "" && <p className="mensagem-erro">{erro}</p>}
       {!carregando && erro === "" && disciplinas.length === 0 && (
         <p className="mensagem-vazia">Nenhuma disciplina cadastrada ainda.</p>
       )}
       {!carregando && erro === "" && disciplinas.length > 0 && (
-        <div className="grade-disciplinas">
-          {disciplinas.map((disciplina) => (
-            <DisciplinaCard key={disciplina.id} disciplina={disciplina} />
-          ))}
-        </div>
+        <>
+          <p className="contagem">
+            <strong>{disciplinas.length}</strong> disciplina(s) encontrada(s)
+          </p>
+          <div className="grade-disciplinas">
+            {disciplinas.map((disciplina) => (
+              <DisciplinaCard key={disciplina.id} disciplina={disciplina} />
+            ))}
+          </div>
+        </>
       )}
     </div>
   );
