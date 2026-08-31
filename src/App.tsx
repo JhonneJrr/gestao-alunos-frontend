@@ -5,6 +5,7 @@ import PainelAlunos from "./components/PainelAlunos";
 import TelaDisciplinas from "./components/TelaDisciplinas";
 import TelaEntry from "./components/TelaEntry";
 import TelaHome from "./components/TelaHome";
+import TelaMatriculas from "./components/TelaMatriculas";
 
 function App() {
   const [tela, setTela] = useState<Tela>("entry");
@@ -25,6 +26,7 @@ function App() {
       {tela === "home" && <TelaHome aoAbrirTela={setTela} />}
       {tela === "alunos" && <PainelAlunos aoVoltar={() => setTela("home")} />}
       {tela === "disciplinas" && <TelaDisciplinas aoVoltar={() => setTela("home")} />}
+      {tela === "matriculas" && <TelaMatriculas aoVoltar={() => setTela("home")} />}
     </div>
   );
 }

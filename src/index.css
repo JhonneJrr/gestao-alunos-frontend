@@ -299,6 +299,20 @@ h3 {
   font-size: 13px;
 }
 
+.tela-matriculas {
+  padding: 24px var(--espaco) var(--espaco);
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco);
+  max-width: 640px;
+}
+
+.lista-vinculos ul.grade-disciplinas {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
 .painel {
   display: flex;
   flex-direction: column;
@@ -332,12 +346,19 @@ h3 {
   margin-bottom: 14px;
 }
 
-.campo input {
+.campo input,
+.campo select {
   min-height: 44px;
   padding: 8px 12px;
   border: 1px solid var(--borda);
   border-radius: 8px;
   font: inherit;
+  background: white;
+}
+
+.campo select:focus-visible {
+  outline: 3px solid var(--violeta-suave);
+  outline-offset: 2px;
 }
 
 .campo-erro {
