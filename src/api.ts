@@ -1,4 +1,12 @@
-import type { Aluno, AlunoEntrada, Disciplina, DisciplinaEntrada, FiltrosAluno, Matricula } from "./types";
+import type {
+  Aluno,
+  AlunoEntrada,
+  Disciplina,
+  DisciplinaComContagem,
+  DisciplinaEntrada,
+  FiltrosAluno,
+  Matricula,
+} from "./types";
 import { alunosIniciais, disciplinasIniciais, matriculasIniciais } from "./mock";
 
 export function esperar(ms: number): Promise<void> {
@@ -75,6 +83,19 @@ export async function listarDisciplinas(): Promise<Disciplina[]> {
     await esperar(400);
   }
   return [...bancoDisciplinas];
+}
+
+export async function listarDisciplinasComContagem(): Promise<DisciplinaComContagem[]> {
+  if (!precarregado) {
+    await esperar(400);
+  }
+
+  return bancoDisciplinas.map((disciplina) => {
+    const totalAlunos = bancoMatriculas.filter(
+      (matricula) => matricula.disciplina_id === disciplina.id
+    ).length;
+    return { ...disciplina, totalAlunos };
+  });
 }
 
 export async function criarDisciplina(dados: DisciplinaEntrada): Promise<Disciplina> {

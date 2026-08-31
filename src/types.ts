@@ -24,6 +24,10 @@ export interface DisciplinaEntrada {
   carga_horaria: number;
 }
 
+export interface DisciplinaComContagem extends Disciplina {
+  totalAlunos: number;
+}
+
 export interface FiltrosAluno {
   q?: string;
   idade_minima?: number;

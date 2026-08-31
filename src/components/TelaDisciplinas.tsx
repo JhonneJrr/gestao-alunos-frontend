@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import type { Disciplina } from "../types";
-import { excluirDisciplina, listarDisciplinas } from "../api";
+import type { Disciplina, DisciplinaComContagem } from "../types";
+import { excluirDisciplina, listarDisciplinasComContagem } from "../api";
 import BotaoVoltar from "./BotaoVoltar";
 import DisciplinaCard from "./DisciplinaCard";
 import FormDisciplina from "./FormDisciplina";
@@ -10,14 +10,14 @@ interface TelaDisciplinasProps {
 }
 
 function TelaDisciplinas({ aoVoltar }: TelaDisciplinasProps) {
-  const [disciplinas, setDisciplinas] = useState<Disciplina[]>([]);
+  const [disciplinas, setDisciplinas] = useState<DisciplinaComContagem[]>([]);
   const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState("");
 
   useEffect(() => {
     async function carregar() {
       try {
-        const dados = await listarDisciplinas();
+        const dados = await listarDisciplinasComContagem();
         setDisciplinas(dados);
       } catch {
         setErro("Não foi possível carregar as disciplinas.");
@@ -30,7 +30,7 @@ function TelaDisciplinas({ aoVoltar }: TelaDisciplinasProps) {
   }, []);
 
   function aoCriarDisciplina(novaDisciplina: Disciplina) {
-    setDisciplinas([...disciplinas, novaDisciplina]);
+    setDisciplinas([...disciplinas, { ...novaDisciplina, totalAlunos: 0 }]);
   }
 
   async function aoExcluir(id: number) {
