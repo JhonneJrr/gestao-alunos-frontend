@@ -48,9 +48,27 @@ body {
   height: 22px;
 }
 
-.card-aluno {
-  max-width: 280px;
+.mensagem-status,
+.mensagem-erro,
+.mensagem-vazia {
   margin: var(--espaco);
+}
+
+.mensagem-erro {
+  color: #a4530f;
+}
+
+.painel {
+  padding: 0 var(--espaco);
+}
+
+.grade-alunos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--espaco);
+}
+
+.card-aluno {
   padding: var(--espaco);
   background: var(--superficie);
   border: 1px solid var(--borda);
