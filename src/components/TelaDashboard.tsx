@@ -50,10 +50,12 @@ function TelaDashboard({ aoVoltar }: TelaDashboardProps) {
 
   const total = alunos.length;
   const aprovados = alunos.filter((aluno) => aluno.media >= 6).length;
+  const reprovados = total - aprovados;
   const somaMedias = alunos.reduce((soma, aluno) => soma + aluno.media, 0);
   const mediaGeral = total === 0 ? 0 : somaMedias / total;
   const totalDisciplinas = disciplinas.length;
   const cargaTotal = disciplinas.reduce((soma, disciplina) => soma + disciplina.carga_horaria, 0);
+  const percentualAprovados = total === 0 ? 0 : Math.round((aprovados / total) * 100);
 
   return (
     <div className="tela-dashboard">
@@ -78,9 +80,14 @@ function TelaDashboard({ aoVoltar }: TelaDashboardProps) {
         </div>
       </div>
 
-      <p className="contagem">
-        <strong>{aprovados}</strong> de <strong>{total}</strong> aluno(s) aprovado(s)
-      </p>
+      <div className="painel-aprovacao">
+        <p className="contagem">
+          <strong>{aprovados}</strong> aprovado(s) · <strong>{reprovados}</strong> reprovado(s)
+        </p>
+        <div className="barra">
+          <div className="barra-aprovados" style={{ width: `${percentualAprovados}%` }}></div>
+        </div>
+      </div>
     </div>
   );
 }

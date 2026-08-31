@@ -369,6 +369,34 @@ h3 {
   color: var(--texto-suave);
 }
 
+.painel-aprovacao {
+  padding: var(--espaco);
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  box-shadow: var(--sombra);
+}
+
+.painel-aprovacao .contagem {
+  margin-bottom: 10px;
+}
+
+.barra {
+  height: 10px;
+  border-radius: 999px;
+  background: var(--ambar-suave);
+  overflow: hidden;
+}
+
+.barra-aprovados {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--violeta), var(--violeta-escuro));
+  transition: width 0.3s ease;
+}
+
 .painel {
   display: flex;
   flex-direction: column;
