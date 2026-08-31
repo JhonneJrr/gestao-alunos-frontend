@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import type { Aluno } from "../types";
 import { listarAlunos } from "../api";
 import Filtros from "./Filtros";
+import FormAluno from "./FormAluno";
 import ListaAlunos from "./ListaAlunos";
 
 function PainelAlunos() {
@@ -38,12 +39,9 @@ function PainelAlunos() {
     setMediaMinima("");
   }
 
-  if (carregando) {
-    return <p className="mensagem-status">Carregando...</p>;
-  }
-
-  if (erro) {
-    return <p className="mensagem-erro">{erro}</p>;
+  function aoCriarAluno(novoAluno: Aluno) {
+    setAlunos([...alunos, novoAluno]);
+    limparFiltros();
   }
 
   const temFiltroAtivo = q !== "" || idadeMinima !== "" || mediaMinima !== "";
@@ -52,21 +50,31 @@ function PainelAlunos() {
     : "Nenhum aluno cadastrado ainda.";
 
   return (
-    <section className="painel">
-      <Filtros
-        q={q}
-        idadeMinima={idadeMinima}
-        mediaMinima={mediaMinima}
-        aoMudarQ={setQ}
-        aoMudarIdadeMinima={setIdadeMinima}
-        aoMudarMediaMinima={setMediaMinima}
-        aoLimpar={limparFiltros}
-      />
-      <p className="contagem">
-        <strong>{alunos.length}</strong> aluno(s) encontrado(s)
-      </p>
-      <ListaAlunos alunos={alunos} mensagemVazia={mensagemVazia} />
-    </section>
+    <main className="conteudo">
+      <section className="painel">
+        <Filtros
+          q={q}
+          idadeMinima={idadeMinima}
+          mediaMinima={mediaMinima}
+          aoMudarQ={setQ}
+          aoMudarIdadeMinima={setIdadeMinima}
+          aoMudarMediaMinima={setMediaMinima}
+          aoLimpar={limparFiltros}
+        />
+        {carregando && <p className="mensagem-status">Carregando...</p>}
+        {!carregando && erro !== "" && <p className="mensagem-erro">{erro}</p>}
+        {!carregando && erro === "" && (
+          <>
+            <p className="contagem">
+              <strong>{alunos.length}</strong> aluno(s) encontrado(s)
+            </p>
+            <ListaAlunos alunos={alunos} mensagemVazia={mensagemVazia} />
+          </>
+        )}
+      </section>
+
+      <FormAluno aoCriarAluno={aoCriarAluno} />
+    </main>
   );
 }
 

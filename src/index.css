@@ -58,11 +58,67 @@ body {
   color: #a4530f;
 }
 
+.conteudo {
+  padding: 0 var(--espaco) var(--espaco);
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: var(--espaco);
+  align-items: start;
+}
+
 .painel {
-  padding: 0 var(--espaco);
   display: flex;
   flex-direction: column;
   gap: var(--espaco);
+}
+
+.form-cadastro {
+  padding: var(--espaco);
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: 12px;
+}
+
+.form-cadastro h2 {
+  margin: 0 0 4px;
+}
+
+.form-cadastro > p {
+  margin: 0 0 16px;
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.campo input {
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  font: inherit;
+}
+
+.campo-erro {
+  color: #a4530f;
+  font-size: 13px;
+  margin: -6px 0 14px;
+}
+
+.botao-primario {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px;
+  border-radius: 999px;
+  background: var(--primaria);
+  color: white;
+  font: inherit;
+  font-weight: 600;
 }
 
 .filtros {
