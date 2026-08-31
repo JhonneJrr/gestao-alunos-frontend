@@ -265,6 +265,40 @@ h3 {
   color: var(--texto-suave);
 }
 
+.tela-disciplinas {
+  padding: 24px var(--espaco) var(--espaco);
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco);
+}
+
+.grade-disciplinas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--espaco);
+}
+
+.card-disciplina {
+  padding: var(--espaco);
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  box-shadow: var(--sombra);
+}
+
+.card-disciplina h3 {
+  margin: 0 0 4px;
+  font-size: 15px;
+}
+
+.card-disciplina p {
+  margin: 0;
+  color: var(--texto-suave);
+  font-size: 13px;
+}
+
 .painel {
   display: flex;
   flex-direction: column;

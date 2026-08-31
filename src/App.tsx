@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import type { Tela } from "./types";
 import Cabecalho from "./components/Cabecalho";
 import PainelAlunos from "./components/PainelAlunos";
+import TelaDisciplinas from "./components/TelaDisciplinas";
 import TelaEntry from "./components/TelaEntry";
 import TelaHome from "./components/TelaHome";
 
@@ -23,6 +24,7 @@ function App() {
       <Cabecalho aoIrParaHome={() => setTela("home")} />
       {tela === "home" && <TelaHome aoAbrirTela={setTela} />}
       {tela === "alunos" && <PainelAlunos aoVoltar={() => setTela("home")} />}
+      {tela === "disciplinas" && <TelaDisciplinas aoVoltar={() => setTela("home")} />}
     </div>
   );
 }
