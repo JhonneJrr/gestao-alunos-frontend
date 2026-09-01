@@ -1,4 +1,4 @@
-import type { Aluno, Disciplina, Matricula } from "./types";
+import type { Aluno, Aviso, Disciplina, Frequencia, Matricula, Nota } from "./types";
 
 export const alunosIniciais: Aluno[] = [
   { id: 1, nome: "Ana Beatriz Souza", idade: 19, matricula: "2026001", media: 8.5 },
@@ -25,4 +25,28 @@ export const matriculasIniciais: Matricula[] = [
   { aluno_id: 3, disciplina_id: 3 },
   { aluno_id: 4, disciplina_id: 4 },
   { aluno_id: 6, disciplina_id: 2 },
+];
+
+export const notasIniciais: Nota[] = [
+  { aluno_id: 1, disciplina_id: 1, valor: 8.0 },
+  { aluno_id: 1, disciplina_id: 2, valor: 9.0 },
+  { aluno_id: 2, disciplina_id: 1, valor: 4.5 },
+  { aluno_id: 3, disciplina_id: 3, valor: 9.0 },
+  { aluno_id: 4, disciplina_id: 4, valor: 6.0 },
+  { aluno_id: 6, disciplina_id: 2, valor: 7.8 },
+];
+
+export const frequenciasIniciais: Frequencia[] = [
+  { aluno_id: 1, disciplina_id: 1, presencas: 18, total_aulas: 20 },
+  { aluno_id: 1, disciplina_id: 2, presencas: 20, total_aulas: 20 },
+  { aluno_id: 2, disciplina_id: 1, presencas: 12, total_aulas: 20 },
+  { aluno_id: 3, disciplina_id: 3, presencas: 19, total_aulas: 20 },
+  { aluno_id: 4, disciplina_id: 4, presencas: 15, total_aulas: 20 },
+  { aluno_id: 6, disciplina_id: 2, presencas: 17, total_aulas: 20 },
+];
+
+export const avisosIniciais: Aviso[] = [
+  { id: 1, titulo: "Feriado", mensagem: "Não haverá aula no dia 7 de setembro.", data: "30/08/2026" },
+  { id: 2, titulo: "Reunião de pais", mensagem: "Reunião de pais e mestres marcada para o fim do mês.", data: "01/09/2026" },
+  { id: 3, titulo: "Prova de Python", mensagem: "A prova da disciplina de Python será no dia 10/09.", data: "05/09/2026" },
 ];

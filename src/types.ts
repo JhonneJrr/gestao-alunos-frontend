@@ -39,4 +39,40 @@ export interface Matricula {
   disciplina_id: number;
 }
 
-export type Tela = "entry" | "carregando" | "home" | "alunos" | "disciplinas" | "matriculas" | "dashboard";
+export interface Nota {
+  aluno_id: number;
+  disciplina_id: number;
+  valor: number;
+}
+
+export interface Frequencia {
+  aluno_id: number;
+  disciplina_id: number;
+  presencas: number;
+  total_aulas: number;
+}
+
+export interface Aviso {
+  id: number;
+  titulo: string;
+  mensagem: string;
+  data: string;
+}
+
+export interface AvisoEntrada {
+  titulo: string;
+  mensagem: string;
+  data: string;
+}
+
+export type Tela =
+  | "entry"
+  | "carregando"
+  | "home"
+  | "alunos"
+  | "disciplinas"
+  | "matriculas"
+  | "dashboard"
+  | "boletim"
+  | "frequencia"
+  | "avisos";

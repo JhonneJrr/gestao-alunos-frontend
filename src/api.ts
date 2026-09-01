@@ -1,13 +1,24 @@
 import type {
   Aluno,
   AlunoEntrada,
+  Aviso,
+  AvisoEntrada,
   Disciplina,
   DisciplinaComContagem,
   DisciplinaEntrada,
   FiltrosAluno,
+  Frequencia,
   Matricula,
+  Nota,
 } from "./types";
-import { alunosIniciais, disciplinasIniciais, matriculasIniciais } from "./mock";
+import {
+  alunosIniciais,
+  avisosIniciais,
+  disciplinasIniciais,
+  frequenciasIniciais,
+  matriculasIniciais,
+  notasIniciais,
+} from "./mock";
 
 export function esperar(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -16,6 +27,9 @@ export function esperar(ms: number): Promise<void> {
 let bancoAlunos: Aluno[] = [...alunosIniciais];
 let bancoDisciplinas: Disciplina[] = [...disciplinasIniciais];
 let bancoMatriculas: Matricula[] = [...matriculasIniciais];
+let bancoNotas: Nota[] = [...notasIniciais];
+let bancoFrequencias: Frequencia[] = [...frequenciasIniciais];
+let bancoAvisos: Aviso[] = [...avisosIniciais];
 let precarregado = false;
 
 export async function precarregar(): Promise<void> {
@@ -163,4 +177,120 @@ export async function matricular(alunoId: number, disciplinaId: number): Promise
   }
 
   bancoMatriculas = [...bancoMatriculas, { aluno_id: alunoId, disciplina_id: disciplinaId }];
+}
+
+// =========================== NOTAS (BOLETIM) ===========================
+
+export async function notasDoAluno(alunoId: number): Promise<(Disciplina & { nota: number })[]> {
+  await esperar(300);
+
+  const alunoExiste = bancoAlunos.some((aluno) => aluno.id === alunoId);
+  if (!alunoExiste) {
+    throw new Error("Aluno não encontrado");
+  }
+
+  const resultado: (Disciplina & { nota: number })[] = [];
+
+  for (const nota of bancoNotas) {
+    if (nota.aluno_id !== alunoId) {
+      continue;
+    }
+    const disciplina = bancoDisciplinas.find((disciplina) => disciplina.id === nota.disciplina_id);
+    if (disciplina) {
+      resultado.push({ ...disciplina, nota: nota.valor });
+    }
+  }
+
+  return resultado;
+}
+
+export async function lancarNota(alunoId: number, disciplinaId: number, valor: number): Promise<void> {
+  await esperar(300);
+
+  const matriculado = bancoMatriculas.some(
+    (matricula) => matricula.aluno_id === alunoId && matricula.disciplina_id === disciplinaId
+  );
+  if (!matriculado) {
+    throw new Error("O aluno não está matriculado nessa disciplina");
+  }
+
+  const notaExistente = bancoNotas.some(
+    (nota) => nota.aluno_id === alunoId && nota.disciplina_id === disciplinaId
+  );
+
+  if (notaExistente) {
+    bancoNotas = bancoNotas.map((nota) => {
+      if (nota.aluno_id === alunoId && nota.disciplina_id === disciplinaId) {
+        return { ...nota, valor };
+      }
+      return nota;
+    });
+  } else {
+    bancoNotas = [...bancoNotas, { aluno_id: alunoId, disciplina_id: disciplinaId, valor }];
+  }
+}
+
+// =========================== FREQUÊNCIA ===========================
+
+export interface DisciplinaComFrequencia extends Disciplina {
+  presencas: number;
+  total_aulas: number;
+  percentual: number;
+}
+
+export async function frequenciasDoAluno(alunoId: number): Promise<DisciplinaComFrequencia[]> {
+  await esperar(300);
+
+  const alunoExiste = bancoAlunos.some((aluno) => aluno.id === alunoId);
+  if (!alunoExiste) {
+    throw new Error("Aluno não encontrado");
+  }
+
+  const resultado: DisciplinaComFrequencia[] = [];
+
+  for (const frequencia of bancoFrequencias) {
+    if (frequencia.aluno_id !== alunoId) {
+      continue;
+    }
+    const disciplina = bancoDisciplinas.find((disciplina) => disciplina.id === frequencia.disciplina_id);
+    if (disciplina) {
+      const percentual = Math.round((frequencia.presencas / frequencia.total_aulas) * 100);
+      resultado.push({
+        ...disciplina,
+        presencas: frequencia.presencas,
+        total_aulas: frequencia.total_aulas,
+        percentual,
+      });
+    }
+  }
+
+  return resultado;
+}
+
+// =========================== AVISOS ===========================
+
+export async function listarAvisos(): Promise<Aviso[]> {
+  await esperar(300);
+  return [...bancoAvisos].reverse();
+}
+
+export async function criarAviso(dados: AvisoEntrada): Promise<Aviso> {
+  await esperar(300);
+
+  const novoId = Math.max(0, ...bancoAvisos.map((aviso) => aviso.id)) + 1;
+  const novoAviso: Aviso = { id: novoId, ...dados };
+  bancoAvisos = [...bancoAvisos, novoAviso];
+
+  return novoAviso;
+}
+
+export async function excluirAviso(id: number): Promise<void> {
+  await esperar(300);
+
+  const existe = bancoAvisos.some((aviso) => aviso.id === id);
+  if (!existe) {
+    throw new Error("Aviso não encontrado");
+  }
+
+  bancoAvisos = bancoAvisos.filter((aviso) => aviso.id !== id);
 }
