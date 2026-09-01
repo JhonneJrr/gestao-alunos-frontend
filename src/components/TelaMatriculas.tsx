@@ -60,6 +60,7 @@ function TelaMatriculas({ aoVoltar }: TelaMatriculasProps) {
 
   function aoMudarAluno(novoAlunoId: string) {
     setAlunoId(novoAlunoId);
+    setDisciplinaId("");
     setMensagem("");
     setMensagemErro("");
   }
@@ -84,87 +85,110 @@ function TelaMatriculas({ aoVoltar }: TelaMatriculasProps) {
     }
   }
 
-  if (carregando) {
-    return (
-      <div className="tela-matriculas">
-        <BotaoVoltar aoVoltar={aoVoltar} />
-        <p className="mensagem-status">Carregando...</p>
-      </div>
-    );
-  }
-
-  if (erro !== "") {
-    return (
-      <div className="tela-matriculas">
-        <BotaoVoltar aoVoltar={aoVoltar} />
-        <p className="mensagem-erro">{erro}</p>
-      </div>
-    );
-  }
+  const alunoSelecionado = alunos.find((aluno) => aluno.id === Number(alunoId));
 
   return (
     <div className="tela-matriculas">
       <BotaoVoltar aoVoltar={aoVoltar} />
+      <h2>Matrículas</h2>
 
-      <div className="campo">
-        <label htmlFor="select-aluno">Aluno</label>
-        <select id="select-aluno" value={alunoId} onChange={(evento) => aoMudarAluno(evento.target.value)}>
-          <option value="">Selecione um aluno</option>
-          {alunos.map((aluno) => (
-            <option key={aluno.id} value={aluno.id}>
-              {aluno.nome}
-            </option>
-          ))}
-        </select>
-      </div>
+      {carregando && <p className="mensagem-status">Carregando...</p>}
+      {!carregando && erro !== "" && <p className="mensagem-erro">{erro}</p>}
 
-      {alunoId !== "" && (
+      {!carregando && erro === "" && (
         <>
-          <form className="form-matricula" onSubmit={aoMatricular}>
-            <div className="campo">
-              <label htmlFor="select-disciplina">Disciplina</label>
-              <select
-                id="select-disciplina"
-                value={disciplinaId}
-                onChange={(evento) => setDisciplinaId(evento.target.value)}
-              >
-                <option value="">Selecione uma disciplina</option>
-                {disciplinas.map((disciplina) => (
-                  <option key={disciplina.id} value={disciplina.id}>
-                    {disciplina.nome}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            {mensagemErro !== "" && <p className="campo-erro">{mensagemErro}</p>}
-            {mensagem !== "" && <p className="mensagem-sucesso">{mensagem}</p>}
-
-            <button className="botao-primario" type="submit">
-              Matricular
-            </button>
-          </form>
-
-          <div className="lista-vinculos">
-            {carregandoVinculos && <p className="mensagem-status">Carregando...</p>}
-            {!carregandoVinculos && disciplinasDoAlunoLista.length === 0 && (
-              <p className="mensagem-vazia">Este aluno ainda não tem disciplinas.</p>
-            )}
-            {!carregandoVinculos && disciplinasDoAlunoLista.length > 0 && (
-              <ul className="grade-disciplinas">
-                {disciplinasDoAlunoLista.map((disciplina) => (
-                  <li key={disciplina.id} className="card-disciplina">
-                    <h3>{disciplina.nome}</h3>
-                    <p>{disciplina.carga_horaria} h</p>
-                  </li>
-                ))}
-              </ul>
-            )}
+          <div className="selecao-aluno">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <select value={alunoId} onChange={(evento) => aoMudarAluno(evento.target.value)} aria-label="Selecione um aluno">
+              <option value="">Selecione um aluno</option>
+              {alunos.map((aluno) => (
+                <option key={aluno.id} value={aluno.id}>
+                  {aluno.nome}
+                </option>
+              ))}
+            </select>
           </div>
+
+          {alunoId === "" && (
+            <p className="mensagem-vazia">Selecione um aluno para ver e gerenciar as disciplinas dele.</p>
+          )}
+
+          {alunoId !== "" && alunoSelecionado && (
+            <div className="painel-matricula">
+              <div className="aluno-selecionado">
+                <div className="aluno-selecionado-icone">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                  </svg>
+                </div>
+                <div>
+                  <h3>{alunoSelecionado.nome}</h3>
+                  <p>
+                    Matrícula {alunoSelecionado.matricula} · Média {alunoSelecionado.media}
+                  </p>
+                </div>
+              </div>
+
+              {disciplinas.length === 0 && (
+                <p className="mensagem-vazia">Nenhuma disciplina cadastrada ainda.</p>
+              )}
+
+              {disciplinas.length > 0 && (
+                <form className="form-matricula-inline" onSubmit={aoMatricular}>
+                  <div className="campo">
+                    <label htmlFor="select-disciplina">Nova disciplina</label>
+                    <select
+                      id="select-disciplina"
+                      value={disciplinaId}
+                      onChange={(evento) => setDisciplinaId(evento.target.value)}
+                    >
+                      <option value="">Selecione uma disciplina</option>
+                      {disciplinas.map((disciplina) => (
+                        <option key={disciplina.id} value={disciplina.id}>
+                          {disciplina.nome}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <button className="botao-primario" type="submit">
+                    Matricular
+                  </button>
+
+                  {mensagemErro !== "" && <p className="campo-erro">{mensagemErro}</p>}
+                  {mensagem !== "" && <p className="mensagem-sucesso">{mensagem}</p>}
+                </form>
+              )}
+
+              <div className="lista-vinculos">
+                <p className="rotulo-secao">Disciplinas cursadas</p>
+                {carregandoVinculos && <p className="mensagem-status">Carregando...</p>}
+                {!carregandoVinculos && disciplinasDoAlunoLista.length === 0 && (
+                  <p className="mensagem-vazia">Este aluno ainda não tem disciplinas.</p>
+                )}
+                {!carregandoVinculos && disciplinasDoAlunoLista.length > 0 && (
+                  <ul className="chips-disciplinas">
+                    {disciplinasDoAlunoLista.map((disciplina) => (
+                      <li key={disciplina.id} className="chip-disciplina">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M12 5v16"></path>
+                          <path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z"></path>
+                        </svg>
+                        {disciplina.nome}
+                        <span className="chip-disciplina-horas">{disciplina.carga_horaria}h</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </div>
+          )}
         </>
       )}
-
-      {disciplinas.length === 0 && <p className="mensagem-vazia">Nenhuma disciplina cadastrada ainda.</p>}
     </div>
   );
 }

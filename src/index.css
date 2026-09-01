@@ -453,19 +453,87 @@ h3 {
   display: flex;
   flex-direction: column;
   gap: var(--espaco);
-  max-width: 640px;
+  max-width: 720px;
 }
 
-.lista-vinculos ul.grade-disciplinas {
-  padding: 0;
-  margin: 0;
-  list-style: none;
+.selecao-aluno {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 20px;
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: 999px;
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  box-shadow: var(--sombra);
 }
 
-.form-matricula {
+.selecao-aluno svg {
+  width: 20px;
+  height: 20px;
+  color: var(--violeta-escuro);
+  flex-shrink: 0;
+}
+
+.selecao-aluno select {
+  flex: 1;
+  min-height: 44px;
+  border: none;
+  outline: none;
+  background: transparent;
+  font: inherit;
+  font-size: 15px;
+}
+
+.painel-matricula {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--espaco);
+}
+
+.aluno-selecionado {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 22px;
+  background: var(--violeta-suave);
+  border-radius: var(--raio);
+}
+
+.aluno-selecionado-icone {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: linear-gradient(155deg, var(--violeta), var(--violeta-escuro));
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.aluno-selecionado-icone svg {
+  width: 22px;
+  height: 22px;
+}
+
+.aluno-selecionado h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.aluno-selecionado p {
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: var(--texto-suave);
+}
+
+.form-matricula-inline {
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+  flex-wrap: wrap;
   padding: var(--espaco);
   background: var(--superficie);
   border: 1px solid var(--borda);
@@ -475,10 +543,69 @@ h3 {
   box-shadow: var(--sombra);
 }
 
+.form-matricula-inline .campo {
+  flex: 1;
+  min-width: 200px;
+  margin-bottom: 0;
+}
+
+.form-matricula-inline .botao-primario {
+  width: auto;
+  padding: 0 28px;
+  flex-shrink: 0;
+}
+
+.form-matricula-inline .campo-erro,
+.form-matricula-inline .mensagem-sucesso {
+  flex-basis: 100%;
+  margin: 0;
+}
+
 .mensagem-sucesso {
   color: var(--violeta-escuro);
   font-size: 13px;
-  margin: -6px 0 14px;
+}
+
+.rotulo-secao {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--texto-suave);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.chips-disciplinas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 0;
+  margin: 8px 0 0;
+  list-style: none;
+}
+
+.chip-disciplina {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  background: var(--violeta-suave);
+  color: var(--violeta-escuro);
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.chip-disciplina svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.chip-disciplina-horas {
+  font-weight: 400;
+  opacity: 0.75;
+  font-size: 12px;
 }
 
 .tela-dashboard {
@@ -842,12 +969,15 @@ h3 {
     grid-template-columns: 1fr;
   }
 
-  .form-disciplina-inline .botao-primario {
+  .form-disciplina-inline .botao-primario,
+  .form-matricula-inline .botao-primario {
     width: 100%;
   }
 
   .filtros,
-  .form-disciplina-inline {
+  .form-disciplina-inline,
+  .form-matricula-inline,
+  .selecao-aluno {
     flex-direction: column;
     align-items: stretch;
     border-radius: var(--raio);
