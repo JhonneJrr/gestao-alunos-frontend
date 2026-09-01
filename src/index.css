@@ -453,13 +453,13 @@ h3 {
   display: flex;
   flex-direction: column;
   gap: var(--espaco);
-  max-width: 720px;
 }
 
 .selecao-aluno {
   display: flex;
   align-items: center;
   gap: 12px;
+  max-width: 480px;
   padding: 8px 20px;
   background: var(--superficie);
   border: 1px solid var(--borda);
@@ -467,6 +467,48 @@ h3 {
   backdrop-filter: blur(16px) saturate(1.4);
   -webkit-backdrop-filter: blur(16px) saturate(1.4);
   box-shadow: var(--sombra);
+}
+
+.matricula-grid {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: var(--espaco);
+  align-items: start;
+}
+
+.resumo-aluno {
+  padding: var(--espaco);
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  box-shadow: var(--sombra);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: sticky;
+  top: 24px;
+}
+
+.resumo-aluno h3 {
+  margin: 0;
+  font-size: 15px;
+}
+
+.resumo-aluno-numeros {
+  display: flex;
+  gap: 24px;
+}
+
+.resumo-aluno-numeros > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.resumo-aluno .selo {
+  align-self: flex-start;
 }
 
 .selecao-aluno svg {
@@ -957,6 +999,8 @@ h3 {
 .card-funcao,
 .card-disciplina,
 .indicador,
+.resumo-aluno,
+.painel-matricula,
 .grade-alunos,
 .grade-funcoes,
 .grade-disciplinas,
@@ -965,8 +1009,17 @@ h3 {
 }
 
 @media (max-width: 720px) {
-  .conteudo {
+  .conteudo,
+  .matricula-grid {
     grid-template-columns: 1fr;
+  }
+
+  .selecao-aluno {
+    max-width: none;
+  }
+
+  .resumo-aluno {
+    position: static;
   }
 
   .form-disciplina-inline .botao-primario,
@@ -1004,9 +1057,6 @@ h3 {
     font-size: 22px;
   }
 
-  .tela-matriculas {
-    max-width: none;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
