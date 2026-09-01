@@ -2,10 +2,13 @@ import { useEffect, useState } from "react";
 import type { Tela } from "./types";
 import Cabecalho from "./components/Cabecalho";
 import PainelAlunos from "./components/PainelAlunos";
+import TelaAvisos from "./components/TelaAvisos";
+import TelaBoletim from "./components/TelaBoletim";
 import TelaCarregando from "./components/TelaCarregando";
 import TelaDashboard from "./components/TelaDashboard";
 import TelaDisciplinas from "./components/TelaDisciplinas";
 import TelaEntry from "./components/TelaEntry";
+import TelaFrequencia from "./components/TelaFrequencia";
 import TelaHome from "./components/TelaHome";
 import TelaMatriculas from "./components/TelaMatriculas";
 
@@ -68,6 +71,9 @@ function App() {
       {tela === "disciplinas" && <TelaDisciplinas aoVoltar={() => setTela("home")} />}
       {tela === "matriculas" && <TelaMatriculas aoVoltar={() => setTela("home")} />}
       {tela === "dashboard" && <TelaDashboard aoVoltar={() => setTela("home")} />}
+      {tela === "boletim" && <TelaBoletim aoVoltar={() => setTela("home")} />}
+      {tela === "frequencia" && <TelaFrequencia aoVoltar={() => setTela("home")} />}
+      {tela === "avisos" && <TelaAvisos aoVoltar={() => setTela("home")} />}
     </div>
   );
 }

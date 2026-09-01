@@ -58,6 +58,47 @@ function TelaHome({ aoAbrirTela }: TelaHomeProps) {
             <rect width="7" height="5" x="3" y="16" rx="1"></rect>
           </svg>
         </CardFuncao>
+
+        <CardFuncao
+          titulo="Boletim"
+          descricao="Lançar e consultar as notas de cada aluno."
+          aoAbrir={(evento) => aoAbrirTela("boletim", evento)}
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <rect width="8" height="4" x="8" y="2" rx="1" ry="1"></rect>
+            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+            <path d="M12 11h4"></path>
+            <path d="M12 16h4"></path>
+            <path d="M8 11h.01"></path>
+            <path d="M8 16h.01"></path>
+          </svg>
+        </CardFuncao>
+
+        <CardFuncao
+          titulo="Frequência"
+          descricao="Ver a frequência de cada aluno por disciplina."
+          aoAbrir={(evento) => aoAbrirTela("frequencia", evento)}
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M8 2v3"></path>
+            <path d="M16 2v3"></path>
+            <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+            <path d="M3 9h18"></path>
+            <path d="m9 15 2 2 4-4"></path>
+          </svg>
+        </CardFuncao>
+
+        <CardFuncao
+          titulo="Mural de Avisos"
+          descricao="Publicar e ver comunicados do portal."
+          aoAbrir={(evento) => aoAbrirTela("avisos", evento)}
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M11 6a13 13 0 0 0 8.4-2.8A1 1 0 0 1 21 4v12a1 1 0 0 1-1.6.8A13 13 0 0 0 11 14H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z"></path>
+            <path d="M6 14a12 12 0 0 0 2.4 7.2 2 2 0 0 0 3.2-2.4A8 8 0 0 1 10 14"></path>
+            <path d="M8 6v8"></path>
+          </svg>
+        </CardFuncao>
       </div>
     </div>
   );
