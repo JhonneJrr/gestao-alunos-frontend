@@ -571,18 +571,76 @@ h3 {
   line-height: 1.5;
 }
 
-.selecao-aluno {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  max-width: 480px;
-  padding: 8px 20px;
+.tela-com-roster {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: var(--espaco);
+  align-items: start;
+}
+
+.roster-alunos {
+  padding: var(--espaco);
   background: var(--superficie);
   border: 1px solid var(--borda);
-  border-radius: 999px;
+  border-radius: var(--raio);
   backdrop-filter: blur(16px) saturate(1.4);
   -webkit-backdrop-filter: blur(16px) saturate(1.4);
   box-shadow: var(--sombra);
+  max-height: 560px;
+  overflow-y: auto;
+}
+
+.roster-lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.roster-item {
+  width: 100%;
+  min-height: 44px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 2px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: transparent;
+  text-align: left;
+  transition: background 0.15s ease;
+}
+
+.roster-item:hover {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.roster-item:focus-visible {
+  outline: 3px solid var(--violeta-suave);
+  outline-offset: 2px;
+}
+
+.roster-item-selecionado,
+.roster-item-selecionado:hover {
+  background: var(--violeta-suave);
+}
+
+.roster-item-nome {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--texto);
+}
+
+.roster-item-selecionado .roster-item-nome {
+  color: var(--violeta-escuro);
+}
+
+.roster-item-matricula {
+  font-size: 11.5px;
+  color: var(--texto-suave);
 }
 
 .matricula-grid {
@@ -625,23 +683,6 @@ h3 {
 
 .resumo-aluno .selo {
   align-self: flex-start;
-}
-
-.selecao-aluno svg {
-  width: 20px;
-  height: 20px;
-  color: var(--violeta-escuro);
-  flex-shrink: 0;
-}
-
-.selecao-aluno select {
-  flex: 1;
-  min-height: 44px;
-  border: none;
-  outline: none;
-  background: transparent;
-  font: inherit;
-  font-size: 15px;
 }
 
 .painel-matricula {
@@ -1117,6 +1158,7 @@ h3 {
 .card-aviso,
 .indicador,
 .resumo-aluno,
+.roster-alunos,
 .painel-matricula,
 .grade-alunos,
 .grade-funcoes,
@@ -1132,8 +1174,12 @@ h3 {
     grid-template-columns: 1fr;
   }
 
-  .selecao-aluno {
-    max-width: none;
+  .tela-com-roster {
+    grid-template-columns: 1fr;
+  }
+
+  .roster-alunos {
+    max-height: 220px;
   }
 
   .resumo-aluno {
@@ -1149,8 +1195,7 @@ h3 {
   .filtros,
   .form-disciplina-inline,
   .form-matricula-inline,
-  .form-aviso-inline,
-  .selecao-aluno {
+  .form-aviso-inline {
     flex-direction: column;
     align-items: stretch;
     border-radius: var(--raio);

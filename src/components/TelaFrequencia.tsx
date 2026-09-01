@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import type { Aluno } from "../types";
 import { frequenciasDoAluno, listarAlunos, type DisciplinaComFrequencia } from "../api";
 import BotaoVoltar from "./BotaoVoltar";
+import SeletorAlunos from "./SeletorAlunos";
 
 interface TelaFrequenciaProps {
   aoVoltar: () => void;
@@ -21,6 +22,9 @@ function TelaFrequencia({ aoVoltar }: TelaFrequenciaProps) {
       try {
         const alunosCarregados = await listarAlunos();
         setAlunos(alunosCarregados);
+        if (alunosCarregados.length > 0) {
+          setAlunoId(String(alunosCarregados[0].id));
+        }
       } catch {
         setErro("Não foi possível carregar os dados.");
       } finally {
@@ -63,24 +67,10 @@ function TelaFrequencia({ aoVoltar }: TelaFrequenciaProps) {
       {!carregando && erro !== "" && <p className="mensagem-erro">{erro}</p>}
 
       {!carregando && erro === "" && (
-        <>
-          <div className="selecao-aluno">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-            <select value={alunoId} onChange={(evento) => setAlunoId(evento.target.value)} aria-label="Selecione um aluno">
-              <option value="">Selecione um aluno</option>
-              {alunos.map((aluno) => (
-                <option key={aluno.id} value={aluno.id}>
-                  {aluno.nome}
-                </option>
-              ))}
-            </select>
-          </div>
+        <div className="tela-com-roster">
+          <SeletorAlunos alunos={alunos} alunoSelecionadoId={alunoId} aoSelecionar={setAlunoId} />
 
-          {alunoId === "" && (
-            <p className="mensagem-vazia">Selecione um aluno para ver a frequência dele.</p>
-          )}
-
-          {alunoId !== "" && alunoSelecionado && (
+          {alunoSelecionado && (
             <div className="painel-matricula">
               <div className="aluno-selecionado">
                 <div className="aluno-selecionado-icone">
@@ -116,7 +106,7 @@ function TelaFrequencia({ aoVoltar }: TelaFrequenciaProps) {
               </div>
             </div>
           )}
-        </>
+        </div>
       )}
     </div>
   );
